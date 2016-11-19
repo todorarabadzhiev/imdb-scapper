@@ -4,28 +4,7 @@
 const mongoose = require("mongoose"),
     Schema = mongoose.Schema;
 
-let SimpleActiorSchema = new Schema({
-    roleName: {
-        type: String,
-        required: true
-    },
-    actiorName: {
-        type: String,
-        required: true
-    },
-    // actually even actiors without picture have empty png
-    pictureLink: {
-        type: String,
-        required: true
-    },
-    imdbId: {
-        type: String,
-        required: true
-    }
-});
-
-mongoose.model("SimpleActior", SimpleActiorSchema);
-SimpleActior = mongoose.model("SimpleActior");
+const modelFactory = require("./index");
 
 let MovieDetailsSchema = new Schema({
     imageLink: {
@@ -65,13 +44,8 @@ MovieDetails.statics.getMoviesDetails =
     function(imageLink, trailerLink, title, description, genres, releaseDate, actiors) {
 
         var mappedActiors = actiors.map(v => {
-            new SimpleActior({
-                roleName: v.roleName,
-                actiorName: c.actiorName,
-                pictureLink: v.pictureLink,
-                imdbId: v.imdbId
-            });
-        })
+            modelFactory.getSimpleActior(v.roleName, v.actiorName, v.pictureLink, v.imdbId);
+        });
 
         return new MovieDetails({
             imageLink,
@@ -80,7 +54,7 @@ MovieDetails.statics.getMoviesDetails =
             description,
             genres,
             releaseDate,
-            actiors:mappedActiors
+            actiors: mappedActiors
         })
     };
 
