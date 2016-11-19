@@ -1,6 +1,8 @@
 /* globals require module */
 "use strict";
 
+const constants = require("../config/constants");
+const common = require("../utils/common");
 const mongoose = require("mongoose"),
     Schema = mongoose.Schema;
 
@@ -15,23 +17,22 @@ let SimpleMovieSchema = new Schema({
     }
 });
 
-//  /title/tt0067992/?ref_=adv_li_tt
-function extractImdbIdFromUrl(url) {
-    let index = url.indexOf("/?ref");
-    return url.substring("/title/".length, index);
-}
-
 let SimpleMovie;
 SimpleMovieSchema.statics.getSimpleMovieByNameAndUrl =
     function(name, url) {
-        let imdbId = extractImdbIdFromUrl(url);
+        let imdbId = common.extractImdbIdFromUrl(url,
+            constants.stringTitleBeforeImdbIdInUrl, constants.stringAfterImdbIdInUrl);
         return new SimpleMovie({ name, imdbId });
     };
 
 SimpleMovieSchema.virtual.imdbUrl = function() {
-    return `http://imdb.com/title/${this.imdbId}/?ref_=adv_li_tt`;
+    let url = constants.compiledImdbTitlePlusUrl({
+        'imdbId': this.imdbId
+    });
+    return url;
 };
 
-mongoose.model("SimpleMovie", SimpleMovieSchema);
-SimpleMovie = mongoose.model("SimpleMovie");
+let modelName = constants.simpleMovieModelName;
+mongoose.model(modelName, SimpleMovieSchema);
+SimpleMovie = mongoose.model(modelName);
 module.exports = SimpleMovie;
