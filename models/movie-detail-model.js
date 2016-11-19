@@ -24,6 +24,9 @@ let SimpleActiorSchema = new Schema({
     }
 });
 
+mongoose.model("SimpleActior", SimpleActiorSchema);
+SimpleActior = mongoose.model("SimpleActior");
+
 let MovieDetailsSchema = new Schema({
     imageLink: {
         type: String,
@@ -58,6 +61,29 @@ let MovieDetailsSchema = new Schema({
 let MovieDetails;
 
 // virtual things if needed
+MovieDetails.statics.getMoviesDetails =
+    function(imageLink, trailerLink, title, description, genres, releaseDate, actiors) {
+
+        var mappedActiors = actiors.map(v => {
+            new SimpleActior({
+                roleName: v.roleName,
+                actiorName: c.actiorName,
+                pictureLink: v.pictureLink,
+                imdbId: v.imdbId
+            });
+        })
+
+        return new MovieDetails({
+            imageLink,
+            trailerLink,
+            title,
+            description,
+            genres,
+            releaseDate,
+            actiors:mappedActiors
+        })
+    };
+
 mongoose.model("MovieDetails", MovieDetailsSchema);
 MovieDetails = mongoose.model("MovieDetails");
 module.exports = MovieDetails;
