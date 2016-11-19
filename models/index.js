@@ -1,7 +1,9 @@
 /* globals module require */
 
 const SimpleMovie = require("./simple-movie-model");
-const MovieDetails = require("./detailed-movie-model");
+const AllMovieDetails = require("./detailed-movie-model");
+const MovieDetails = require("./movie-detail-model");
+const SimpleActior = require("./simple-actior-model");
 
 module.exports = {
     getSimpleMovie(name, url) {
@@ -24,7 +26,7 @@ module.exports = {
         return promise;
     },
     getAllMovieDetails(movie) {
-        return MovieDetails.getDetailedMovie(movie);
+        return AllMovieDetails.getDetailedMovie(movie);
     },
     insertDetailedMovie(movie) {
         movie.save(function(err, mov) {
@@ -32,5 +34,14 @@ module.exports = {
                 console.log(err)
             };
         });
+    },
+    getMovieDetails(imageLink, trailerLink, title, description, genres, releaseDate, actiors) {
+        return MovieDetails.getMovieDetails(imageLink, trailerLink, title, description, genres, releaseDate, actiors);
+    },
+    insertManyMovieDetails(movies) {
+        MovieDetails.insertMany(movies);
+    },
+    getSimpleActior(roleName, actiorName, pictureLink, imdbId) {
+        return SimpleActior.getSimpleActior(roleName, actiorName, pictureLink, imdbId);
     }
 };
