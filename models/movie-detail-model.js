@@ -40,6 +40,7 @@ const modelFactory = require("./index");
 // let MovieDetails;
 
 // // virtual things if needed
+// // throw coz not on Schema
 // MovieDetails.statics.getMoviesDetails =
 //     function(imageLink, trailerLink, title, description, genres, releaseDate, actiors) {
 
