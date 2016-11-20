@@ -13,6 +13,12 @@ module.exports = {
     genresSelector: "#titleStoryLine div[itemprop='genre'] a",
     releaseDateSelector: "#titleDetails",
     releaseDateSubSelector: "h4:contains('Release Date:')",
+    // DetailedActior
+    detailedActiorImageSelector: "#name-poster",
+    detailedActiorName: "#overview-top h1 span[itemprop ='name']",
+    detailedActiorBio: "#name-bio-text div[itemprop = 'description']",
+    detailedActiorMovies: "div.filmo-category-section",
+
     simpleMovieModelName: "SimpleMovie",
     detailedMovieModelName: "MovieDetails",
     movieCastModelName: "MovieCast",

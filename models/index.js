@@ -2,8 +2,9 @@
 
 const SimpleMovie = require("./simple-movie-model");
 const AllMovieDetails = require("./detailed-movie-model");
-const MovieDetails = require("./movie-detail-model");
+// const MovieDetails = require("./movie-detail-model");
 const SimpleActior = require("./simple-actior-model");
+const DetailedActior = require("./detailed-actior-model");
 
 module.exports = {
     getSimpleMovie(name, url) {
@@ -35,13 +36,16 @@ module.exports = {
             };
         });
     },
-    getMovieDetails(imageLink, trailerLink, title, description, genres, releaseDate, actiors) {
-        return MovieDetails.getMovieDetails(imageLink, trailerLink, title, description, genres, releaseDate, actiors);
-    },
-    insertManyMovieDetails(movies) {
-        MovieDetails.insertMany(movies);
-    },
+    // getMovieDetails(imageLink, trailerLink, title, description, genres, releaseDate, actiors) {
+    //     return MovieDetails.getMovieDetails(imageLink, trailerLink, title, description, genres, releaseDate, actiors);
+    // },
+    // insertManyMovieDetails(movies) {
+    //     MovieDetails.insertMany(movies);
+    // },
     getSimpleActior(roleName, actiorName, pictureLink, imdbId) {
         return SimpleActior.getSimpleActior(roleName, actiorName, pictureLink, imdbId);
+    },
+    getDetailedActior(actior) {
+        return DetailedActior.getDetailedActior(actior)
     }
 };
