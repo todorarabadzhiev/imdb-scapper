@@ -20,7 +20,7 @@ module.exports = {
                     return reject(err);
                 }
 
-                resolve(imdbIds);
+                return resolve(imdbIds);
             });
         });
 
@@ -45,7 +45,28 @@ module.exports = {
     getSimpleActior(roleName, actiorName, pictureLink, imdbId) {
         return SimpleActior.getSimpleActior(roleName, actiorName, pictureLink, imdbId);
     },
-    getDetailedActior(actior) {
-        return DetailedActior.getDetailedActior(actior)
+    getDetailedActor(actor) {
+        return DetailedActior.getDetailedActior(actor)
+    },
+    insertActor(actor) {
+        actor.save(function(err, act) {
+            if (err) {
+                console.log(err)
+            };
+        });
+    },
+    getAllActorsFromMovie(title) {
+        let promise = new Promise((resolve, reject) => {
+            AllMovieDetails.find({ 'title': title }, "cast", function(err, actors) {
+                if (err) {
+                    return reject(err);
+                }
+
+                console.log(actors[0].cast);
+                return resolve(actors[0].cast);
+            });
+        });
+
+        return promise;
     }
 };

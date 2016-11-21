@@ -7,20 +7,20 @@ const queuesFactory = require("../data-structures/queue");
 
 var urlsQueue = queuesFactory.getQueue();
 
-function getDetailedActiorFromUrl(url) {
+function getDetailedActorFromUrl(url) {
     console.log(`Extracting details from ${url}`);
 
     httpRequester.get(url)
         .then((result) => {
             const html = result.body;
 
-            return htmlParser.TODO(html);
+            return htmlParser.parseDetailActor(html);
         })
-        .then(detailedActior => {
-            let dActior = modelsFactory.TODO(detailedActior);
+        .then(detailedActor => {
+            let dActor = modelsFactory.getDetailedActor(detailedActor);
 
-            modelsFactory.TODO(dActior);
-            console.log("inserting" + dActior.name);
+            modelsFactory.insertActor(dActor);
+            console.log("inserting " + dActor.name);
             return waitTime.wait(constants)
         })
         .then(() => {
@@ -28,7 +28,7 @@ function getDetailedActiorFromUrl(url) {
                 return;
             }
 
-            getDetailedActiorFromUrl(urlsQueue.pop())
+            getDetailedActorFromUrl(urlsQueue.pop())
         })
         .catch((err) => {
             console.dir(err, { colors: true });
@@ -41,9 +41,12 @@ function getImdbDetailedActiorFromUrlsArray(urlsArr) {
     }
 
     for (i = 0; i < constants.asyncPagesCount; i += 1) {
-        getDetailedActiorFromUrl(urlsQueue.pop())
+        let url = urlsQueue.pop();
+        if (url) {
+            getDetailedActorFromUrl(url);
+        }
     }
 }
 
-module.exports.getImdbDetailedActiorFromUrls = getImdbDetailedActiorFromUrls;
+module.exports.getDetailedActorFromUrl = getDetailedActorFromUrl;
 module.exports.getImdbDetailedActiorFromUrlsArray = getImdbDetailedActiorFromUrlsArray;

@@ -26,12 +26,12 @@ let detailedActiorSchema = new Schema({
 let ActiorDetails;
 
 detailedActiorSchema.statics.getDetailedActior =
-    function(actior) {
+    function(actor) {
         return new ActiorDetails({
-            name: actior.name,
-            image: actior.image,
-            bio: actior.bio,
-            movies: actior.movies
+            name: actor.name,
+            image: actor.image,
+            bio: actor.bio,
+            movies: actor.movies
         })
     };
 

@@ -44,5 +44,10 @@ function getImdbDetailedMoviesFromUrlArray(urlsArr) {
     }
 }
 
+function getAllActorsFromMovie(title) {
+    return modelsFactory.getAllActorsFromMovie(title);
+}
+
 module.exports.getMovieDetailsFromUrl = getMovieDetailsFromUrl;
 module.exports.getImdbDetailedMoviesFromUrlArray = getImdbDetailedMoviesFromUrlArray;
+module.exports.getAllActorsFromMovie = getAllActorsFromMovie;

@@ -98,14 +98,48 @@ function parseMovieDetails(html) {
         });
 };
 
-function parseDetailActior(html) {
+function parseDetailActor(html) {
     $("body").html(html);
     let items = {};
 
     const $image = $(constants.detailedActiorImageSelector);
     const $name = $(constants.detailedActiorNameSelector);
     const $bio = $(constants.detailedActiorBioSelector);
+
+    let image = $image.attr("src");
+    let name = $name.text().trim();
+    let bio = $bio.text().trim();
+    let movies = parseActorsMovies(constants.detailedActiorMoviesSelector, html);
+
+    let actor = {
+        image,
+        name,
+        bio,
+        movies
+    }
+
+    return Promise.resolve(actor);
 }
+
+function parseActorsMovies(selector, html) {
+    $("body").html(html);
+    let items = [];
+    $(selector).each((index, item) => {
+        const $item = $(item);
+        let movieName = $("b a", $item).text().trim();
+        let role = $("a[href*='character']", $item).text().trim();
+        let actorMovieId = $item.attr("id");
+        let movieId = actorMovieId.substring(actorMovieId.indexOf("tt"));
+        items.push({
+            movieName,
+            movieId,
+            role
+        });
+    });
+
+    return items;
+};
 
 module.exports.parseSimpleMovie = parseSimpleMovie;
 module.exports.parseMovieDetails = parseMovieDetails;
+module.exports.parseDetailActor = parseDetailActor;

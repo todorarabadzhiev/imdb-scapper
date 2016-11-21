@@ -1,5 +1,6 @@
 const simpleMoviesProvider = require("./simple-movie-provider");
 const detailedMovieProvider = require("./detailed-movie-provider");
+const actorProvider = require("./detailed-actior-provider");
 const constants = require("../config/constants");
 
 module.exports = {
@@ -24,6 +25,23 @@ module.exports = {
             })
             .then(urls => {
                 detailedMovieProvider.getImdbDetailedMoviesFromUrlArray(urls);
+            });
+    },
+    getActorsData(title) {
+        detailedMovieProvider.getAllActorsFromMovie(title)
+            .then(actors => {
+                let actorsUrls = actors.map(actor => {
+                    let url = constants.compiledImdbActorNameUrl({
+                        'imdbId': actor.imdbId
+                    });
+
+                    return url;
+                });
+
+                return Promise.resolve(actorsUrls);
+            })
+            .then(urls => {
+                actorProvider.getImdbDetailedActiorFromUrlsArray(urls);
             });
     }
 };

@@ -17,13 +17,13 @@ module.exports = {
     detailedActiorImageSelector: "#name-poster",
     detailedActiorNameSelector: "#overview-top h1 span[itemprop ='name']",
     detailedActiorBioSelector: "#name-bio-text div[itemprop = 'description']",
-    detailedActiorMoviesSelector: "div.filmo-category-section",
+    detailedActiorMoviesSelector: "#filmography div.filmo-category-section div.filmo-row",
 
     simpleMovieModelName: "SimpleMovie",
     detailedMovieModelName: "MovieDetails",
     movieCastModelName: "MovieCast",
     detailedActiorModelName: "ActiorDetails",
-    releaseDateStr: 'Release Date:',
+    releaseDateStr: "Release Date:",
     pagesCount: 50,
     asyncPagesCount: 20,
     timeout: 1000,
@@ -32,5 +32,6 @@ module.exports = {
     stringNameBeforeImdbIdInUrl: "/name/",
     compiledImdbSearchUrl: _.template("http://www.imdb.com/search/title?genres=<%= genre %>&title_type=feature&0sort=moviemeter,asc&page=<%= page %>&view=simple&ref_=adv_nxt"),
     compiledImdbTitlePlusUrl: _.template("http://imdb.com/title/<%= imdbId %>/?ref_=adv_li_tt"),
-    compiledImdbTitleUrl: _.template("http://imdb.com/title/<%= imdbId %>/")
+    compiledImdbTitleUrl: _.template("http://imdb.com/title/<%= imdbId %>/"),
+    compiledImdbActorNameUrl: _.template("http://imdb.com/name/<%= imdbId %>/")
 };
