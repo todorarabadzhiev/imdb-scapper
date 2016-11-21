@@ -15,9 +15,9 @@ module.exports = {
     releaseDateSubSelector: "h4:contains('Release Date:')",
     // DetailedActior
     detailedActiorImageSelector: "#name-poster",
-    detailedActiorName: "#overview-top h1 span[itemprop ='name']",
-    detailedActiorBio: "#name-bio-text div[itemprop = 'description']",
-    detailedActiorMovies: "div.filmo-category-section",
+    detailedActiorNameSelector: "#overview-top h1 span[itemprop ='name']",
+    detailedActiorBioSelector: "#name-bio-text div[itemprop = 'description']",
+    detailedActiorMoviesSelector: "div.filmo-category-section",
 
     simpleMovieModelName: "SimpleMovie",
     detailedMovieModelName: "MovieDetails",

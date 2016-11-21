@@ -98,5 +98,14 @@ function parseMovieDetails(html) {
         });
 };
 
+function parseDetailActior(html) {
+    $("body").html(html);
+    let items = {};
+
+    const $image = $(constants.detailedActiorImageSelector);
+    const $name = $(constants.detailedActiorNameSelector);
+    const $bio = $(constants.detailedActiorBioSelector);
+}
+
 module.exports.parseSimpleMovie = parseSimpleMovie;
 module.exports.parseMovieDetails = parseMovieDetails;
